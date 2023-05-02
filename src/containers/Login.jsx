@@ -7,6 +7,7 @@ import { buttonClick } from "../animations/index.js";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../config/firebase.config.js";
+import { validateUserJWTToken } from "../api/index.js";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -23,7 +24,9 @@ const Login = () => {
       firebaseAuth.onAuthStateChanged((cred) => {
         if (cred) {
           cred.getIdToken().then((token) => {
-            console.log(token);
+            validateUserJWTToken(token).then((data) => {
+              console.log(data);
+            });
           });
         }
       });
