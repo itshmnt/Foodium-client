@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LoginBg, Logo } from "../assets/index.js";
 import { LoginInput } from "../components/index.js";
 import { FaEnvelope, FaLock, FcGoogle } from "../assets/icons/index.js";
@@ -15,6 +15,8 @@ import {
 } from "firebase/auth";
 import { app } from "../config/firebase.config.js";
 import { validateUserJWTToken } from "../api/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserDetails } from "../context/actions/userActions.js";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");
@@ -27,6 +29,15 @@ const Login = () => {
   const provider = new GoogleAuthProvider();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      navigate("/", { replace: true });
+    }
+  }, [user]);
 
   const loginWithGoogle = async () => {
     await signInWithPopup(firebaseAuth, provider).then((userCred) => {
@@ -34,7 +45,8 @@ const Login = () => {
         if (cred) {
           cred.getIdToken().then((token) => {
             validateUserJWTToken(token).then((data) => {
-              console.log(data);
+              // console.log(data);
+              dispatch(setUserDetails(data));
             });
             navigate("/", { replace: true });
           });
@@ -60,7 +72,8 @@ const Login = () => {
             if (cred) {
               cred.getIdToken().then((token) => {
                 validateUserJWTToken(token).then((data) => {
-                  console.log(data);
+                  // console.log(data);
+                  dispatch(setUserDetails(data));
                 });
                 navigate("/", { replace: true });
               });
@@ -81,7 +94,8 @@ const Login = () => {
             cred.user.getIdToken().then((token) => {
               /** here ".user" after "cred" is added since v7.* in firebase */
               validateUserJWTToken(token).then((data) => {
-                console.log(data);
+                // console.log(data);
+                dispatch(setUserDetails(data));
               });
               navigate("/", { replace: true });
             });

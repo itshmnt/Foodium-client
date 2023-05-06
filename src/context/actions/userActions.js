@@ -1,4 +1,4 @@
-export const userDetails = (user) => {
+export const setUserDetails = (user) => {
   return {
     type: "SET_USER",
     user: user,
