@@ -4,6 +4,7 @@ import { Login, Main } from "./containers";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
 import { fadeInOut } from "./animations";
+import { MainLoader } from "../src/components/index";
 
 import { getAuth } from "firebase/auth";
 import { app } from "./config/firebase.config";
@@ -38,7 +39,7 @@ const App = () => {
           {...fadeInOut}
           className="fixed z-50 inset-0 bg-lightOverlay backdrop-blur-md flex items-center justify-center w-full"
         >
-          data is loading
+          <MainLoader />
         </motion.div>
       )}
       <Routes>
