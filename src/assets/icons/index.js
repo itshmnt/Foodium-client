@@ -10,6 +10,7 @@ import { MdShoppingCart, MdLogout, MdSearch, MdDelete } from "react-icons/md";
 import {
   BsToggles2,
   BsFillBellFill,
+  BsExclamationTriangle,
   BsExclamationTriangleFill,
 } from "react-icons/bs";
 import { IoFastFood, IoBasket } from "react-icons/io5";
@@ -28,6 +29,7 @@ export {
   MdDelete,
   FaCloudUploadAlt,
   FaCheck,
+  BsExclamationTriangle,
   BsExclamationTriangleFill,
   IoBasket,
   BiChevronsRight,
