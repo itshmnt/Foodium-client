@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Login, Main } from "./containers";
+import { Login, Main, Dashboard } from "./containers";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { fadeInOut } from "./animations";
@@ -48,6 +48,7 @@ const App = () => {
       <Routes>
         <Route path="/*" element={<Main />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
       </Routes>
 
       {alert?.type && <Alert type={alert?.type} message={alert?.message} />}
